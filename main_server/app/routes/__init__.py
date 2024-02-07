@@ -1,4 +1,5 @@
-from test_routes import router 
+from fastapi import APIRouter
+from .test_routes import router
 
 api_v1 = APIRouter()
 
