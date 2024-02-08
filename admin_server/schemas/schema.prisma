@@ -1,0 +1,74 @@
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Account {
+    id       String    @id @default(auto()) @map("_id") @db.ObjectId
+    email    String    @unique
+    password String
+    Clients  Clients[]
+    Picker   Picker[]
+}
+
+model Clients {
+    id           String     @id @default(auto()) @map("_id") @db.ObjectId
+    acccount_id  String     @unique @db.ObjectId
+    name         String
+    phone_number String?
+    user         Account    @relation(fields: [acccount_id], references: [id], onDelete: Cascade)
+    Pickeups     Pickeups[]
+}
+
+model Picker {
+    id               String             @id @default(auto()) @map("_id") @db.ObjectId
+    acccount_id      String             @unique @db.ObjectId
+    name             String
+    phone_number     String
+    available        Boolean            @default(true)
+    user             Account            @relation(fields: [acccount_id], references: [id], onDelete: Cascade)
+    Pickeups         Pickeups[]
+    PickupHistory    PickupHistory[]
+    PickerAssignment PickerAssignment[]
+}
+
+model Pickeups {
+    id           String  @id @default(auto()) @map("_id") @db.ObjectId
+    location     Json
+    requested_by Clients @relation(fields: [requested_id], references: [acccount_id])
+    requested_id String  @db.ObjectId
+    assigned_to  Picker  @relation(fields: [assigned_id], references: [acccount_id])
+    assigned_id  String  @db.ObjectId
+    is_picked    Boolean @default(false)
+}
+
+model PickupHistory {
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    picked_date DateTime
+    picked_by   Picker   @relation(fields: [picker_id], references: [acccount_id])
+    picker_id   String   @db.ObjectId
+}
+
+model PickerAssignment {
+    id                String   @id @default(auto()) @map("_id") @db.ObjectId
+    picked_date       DateTime
+    picked_account_id Picker   @relation(fields: [picker_id], references: [acccount_id])
+    picker_id         String   @db.ObjectId
+}
+
+model Location {
+    id  String @id @default(auto()) @map("_id") @db.ObjectId
+    lat BigInt
+    lng BigInt
+}
+
+model ClusterQueue {
+    id         String @id @default(auto()) @map("_id") @db.ObjectId
+    max_radius BigInt
+    centroid   Json
+    points     Json[]
+}
