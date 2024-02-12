@@ -8,7 +8,7 @@ generator client {
 }
 
 model Account {
-    id       String    @id @default(auto()) @map("_id") @db.ObjectId
+    id       Int       @id @default(autoincrement())
     email    String    @unique
     password String
     Clients  Clients[]
@@ -16,8 +16,8 @@ model Account {
 }
 
 model Clients {
-    id           String     @id @default(auto()) @map("_id") @db.ObjectId
-    acccount_id  String     @unique @db.ObjectId
+    id           Int        @id @default(autoincrement())
+    acccount_id  Int        @unique
     name         String
     phone_number String?
     user         Account    @relation(fields: [acccount_id], references: [id], onDelete: Cascade)
@@ -25,8 +25,8 @@ model Clients {
 }
 
 model Picker {
-    id               String             @id @default(auto()) @map("_id") @db.ObjectId
-    acccount_id      String             @unique @db.ObjectId
+    id               Int                @id @default(autoincrement())
+    acccount_id      Int                @unique
     name             String
     phone_number     String
     available        Boolean            @default(true)
@@ -37,37 +37,37 @@ model Picker {
 }
 
 model Pickeups {
-    id           String  @id @default(auto()) @map("_id") @db.ObjectId
+    id           Int     @id @default(autoincrement())
     location     Json
     requested_by Clients @relation(fields: [requested_id], references: [acccount_id])
-    requested_id String  @db.ObjectId
+    requested_id Int
     assigned_to  Picker  @relation(fields: [assigned_id], references: [acccount_id])
-    assigned_id  String  @db.ObjectId
+    assigned_id  Int
     is_picked    Boolean @default(false)
 }
 
 model PickupHistory {
-    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    id          Int      @id @default(autoincrement())
     picked_date DateTime
     picked_by   Picker   @relation(fields: [picker_id], references: [acccount_id])
-    picker_id   String   @db.ObjectId
+    picker_id   Int
 }
 
 model PickerAssignment {
-    id                String   @id @default(auto()) @map("_id") @db.ObjectId
+    id                Int      @id @default(autoincrement())
     picked_date       DateTime
     picked_account_id Picker   @relation(fields: [picker_id], references: [acccount_id])
-    picker_id         String   @db.ObjectId
+    picker_id         Int
 }
 
 model Location {
-    id  String @id @default(auto()) @map("_id") @db.ObjectId
+    id  Int    @id @default(autoincrement())
     lat BigInt
     lng BigInt
 }
 
 model ClusterQueue {
-    id         String @id @default(auto()) @map("_id") @db.ObjectId
+    id         Int    @id @default(autoincrement())
     max_radius BigInt
     centroid   Json
     points     Json[]
