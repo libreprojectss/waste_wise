@@ -1,3 +1,5 @@
+import { number } from "yup";
+
 export interface IUser {
   id: number;
   createdAt: string;
@@ -10,4 +12,9 @@ export interface IUser {
 export interface IUserState {
   user: IUser | null;
   loginStatus: boolean;
+}
+
+export interface Ilocation {
+  lat: number;
+  long: number;
 }

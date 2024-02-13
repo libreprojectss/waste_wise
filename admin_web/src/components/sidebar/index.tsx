@@ -11,10 +11,7 @@ import cn from "classnames";
 
 import logo from "@/assets/Icon.svg";
 
-import {
-  customerCareLink,
-  navigationLinks,
-} from "@/navigation/admin-navigation";
+import { navigationLinks } from "@/navigation/admin-navigation";
 
 import { resetLogin } from "@/redux/slices/user-slice";
 
@@ -105,33 +102,7 @@ function Sidebar({
             ))}
             <br />
 
-            <div className="mt-4">
-              {/* <div className="flex justify-between items-center text-neutral-600">
-                <p className="font-semibold text-sm">PROJECTS</p>
-                <Link to="/admin/create-project">
-                  <PlusIcon height={20} width={20} />
-                </Link>
-              </div> */}
-
-              {/* <div className="mt-4 max-h-[60vh] overflow-y-scroll bar">
-                {projects?.data &&
-                  projects.data.projects.map((item) => (
-                    <Link
-                      to={`/admin/project-detail/${item.id}/overview`}
-                      key={item.id}
-                      className={cn(
-                        "block p-2 body-default-semibold text-neutral-400 hover:text-core-primary hover:bg-core-primary-light",
-                        {
-                          "!text-core-primary bg-core-primary-light":
-                            pathname.includes(String(`/${item.id}/`)),
-                        }
-                      )}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-              </div> */}
-            </div>
+            <div className="mt-4"></div>
           </div>
         </div>
         <div className="p-5">

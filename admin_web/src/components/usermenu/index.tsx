@@ -19,7 +19,7 @@ export default function UserMenu() {
           </div>
           <Menu.Button>
             <div className="flex gap-x-1 items-center">
-              <p>{user?.email || "John"}</p>
+              <p>{"John"}</p>
               <ChevronDownIcon width={20} height={20} />
             </div>
           </Menu.Button>

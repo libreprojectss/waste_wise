@@ -21,7 +21,7 @@ const createClusterCustomIcon = function (cluster: MarkerCluster) {
   });
 };
 
-function MapComponent() {
+function MapLayout({ children }: { children: React.ReactNode }) {
   const [dynamicPosition, setPosition] = useState<L.LatLngExpression>([
     28.051687, 83.987261,
   ]);
@@ -29,15 +29,16 @@ function MapComponent() {
     <>
       <MapContainer
         className="leaflet-container"
-        center={[28.2613485, 83.9721112]}
-        zoom={4}
+        center={[28.25, 83.95]}
+        zoom={6}
         scrollWheelZoom={true}
       >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <MarkerClusterGroup
+        {children}
+        {/* <MarkerClusterGroup
           onClick={(e) => console.log("onClick", e)}
           iconCreateFunction={createClusterCustomIcon}
           maxClusterRadius={150}
@@ -61,10 +62,10 @@ function MapComponent() {
             icon={customIcon}
           />
           <Marker position={[28.931841, 83.876713]} icon={customIcon} />
-        </MarkerClusterGroup>
+        </MarkerClusterGroup> */}
       </MapContainer>
     </>
   );
 }
 
-export default MapComponent;
+export default MapLayout;

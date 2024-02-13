@@ -8,6 +8,6 @@ export const AuthConfig = {
 };
 
 export const LocationConfig = {
-  GET_ALL: () => "/admin/locations",
-  ADD_LOCATION: () => "/admin/locations",
+  GET_ALL: () => "/locations",
+  ADD_LOCATION: () => "/locations/add",
 };

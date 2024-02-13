@@ -1,9 +1,10 @@
 import NavBar from "@/components/navbar";
 import Sidebar from "@/components/sidebar";
-import { RootState } from "@/redux/store";
+import ErrorBoundary from "@/components/ui/error-boundary";
+
 import cn from "classnames";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+
 import { Navigate, useLocation, Outlet } from "react-router-dom";
 
 function AppLayout() {
@@ -35,9 +36,11 @@ function AppLayout() {
           })}
         >
           <NavBar />
-          <div className="w-full  overflow-x-none transition translation-all">
-            <Outlet />
-          </div>
+          <ErrorBoundary>
+            <div className="w-full  overflow-x-none transition translation-all">
+              <Outlet />
+            </div>
+          </ErrorBoundary>
         </div>
       </div>
     </>

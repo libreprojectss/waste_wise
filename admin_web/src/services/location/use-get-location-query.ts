@@ -5,13 +5,11 @@ import toast from "react-hot-toast";
 import http from "@/lib/http";
 import { LocationConfig } from "@/services/api.config";
 
-const getLocationApi = async () => {
+const getLocationApi = async (): Promise<any> => {
   try {
     const url = LocationConfig.GET_ALL();
     const response = await http(url);
-    return response.data.categories;
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return response.data;
   } catch (e: any) {
     toast.error(e?.response?.data?.message || "Something went wrong");
     return;
