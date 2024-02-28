@@ -5,3 +5,8 @@ router = APIRouter()
 @router.get("/")
 async def root():
     return {"message": "This is working"}
+
+@router.post("/login",)
+async def login(req,res):
+    
+
