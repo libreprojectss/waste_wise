@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+@layer base {
+  html {
+    font-family: "figtree", "san-serif";
+    scroll-behavior: smooth;
+  }
+  tr {
+    @apply px-5 text-[14px] font-medium tracking-[0.02em] text-neutral-700;
+  }
+
+  td {
+    @apply px-5 py-4;
+  }
+
+  th {
+    @apply text-neutral-600 px-5 py-4 font-semibold;
+  }
+
+  thead {
+    @apply border-y border-neutral-200;
+  }
+}
+
+.bar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.drawer-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.bar::-webkit-scrollbar-track {
+  background: #e5e5e5;
+  border-radius: 50px;
+}
+
+.bar::-webkit-scrollbar-thumb {
+  background: #808080;
+  border-radius: 50px;
+}
+
+@layer components {
+  .input {
+    @apply block w-full px-2 py-3 rounded-md border text-sm font-normal  outline-none border-neutral-200 focus:border-core-primary;
+  }
+
+  .label {
+    @apply block mb-1 text-sm font-semibold text-neutral-900;
+  }
+
+  .primary-btn {
+    @apply px-3 py-3 w-full rounded-full text-shade-light text-base  bg-core-primary;
+  }
+
+  .secondary-btn {
+    @apply primary-btn bg-neutral-50 text-neutral-800;
+  }
+  .large-title {
+    @apply font-medium text-3xl;
+  }
+  .title {
+    @apply font-medium text-xl;
+  }
+  .headline {
+    @apply font-medium text-[16px];
+  }
+  .body {
+    @apply font-normal text-[16px];
+  }
+  .foot-note {
+    @apply font-normal text-sm;
+  }
+  .caption {
+    @apply font-medium text-xs;
+  }
+
+  .body-default-semibold {
+    @apply text-sm font-semibold;
+  }
+
+  .body-small {
+    @apply text-xs;
+  }
+
+  .body-small-semibold {
+    @apply font-semibold text-xs;
+  }
+
+  .link-large {
+    @apply font-semibold underline;
+  }
+
+  .link-default {
+    @apply text-sm font-semibold underline;
+  }
+
+  .link-small {
+    @apply text-sm font-semibold;
+  }
+
+  .accepted-badge {
+    @apply body-default-semibold w-fit rounded-2xl px-2 py-1 text-supporting-success bg-supporting-success-light;
+  }
+
+  .pending-badge {
+    @apply body-default-semibold px-3 py-1 text-supporting-warning bg-supporting-warning-light;
+  }
+
+  .secondary-badge {
+    @apply body-default-semibold w-fit rounded-2xl px-2 py-1 text-neutral-800 bg-neutral-50;
+  }
+
+  .required {
+    @apply font-normal text-sm;
+  }
+
+  .error-msg {
+    @apply mt-1 text-supporting-error text-sm;
+  }
+
+  .primaryButton {
+    @apply bg-core-indigo dark:bg-core-indigo focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 px-4 py-2 text-white rounded-lg;
+  }
+
+  .secondaryButton {
+    @apply bg-supporting-warning-light hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-800 border-2 border-gray-200 rounded-md shadow-sm;
+  }
+
+  .transparentButton {
+    @apply px-9 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 py-3 text-white bg-transparent;
+  }
+
+  .redButton {
+    @apply bg-danger px-9 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 py-2 text-white rounded-lg;
+  }
+
+  .greenButton {
+    @apply bg-success px-9 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 py-2 text-white;
+  }
+
+  .addButton {
+    @apply hover:bg-gray-100 text-core-primary dark:text-core-primary border-core-primary dark:border-core-primary hover:text-white hover:border-white hover:bg-core-primary flex items-center gap-2 px-3 py-2 text-lg border-2 rounded-lg;
+  }
+
+  .tableHead {
+    @apply text-core-primary text-start px-5 py-3;
+  }
+
+  .tableData {
+    @apply text-start px-5 py-3;
+  }
+
+  .tableDataActionContainer {
+    @apply flex justify-start space-x-2;
+  }
+
+  .tableActionContainer {
+    @apply bg-gray-50 hover:bg-gray-300 p-2 rounded-full cursor-pointer;
+  }
+
+  .tableEditIcon {
+    @apply text-core-primary dark:text-core-primary h-5;
+  }
+
+  .tableDeleteIcon {
+    @apply h-5 text-red-500;
+  }
+}
