@@ -2,8 +2,6 @@ import {
   Squares2X2Icon,
   UsersIcon,
   BuildingStorefrontIcon,
-  ChatBubbleOvalLeftEllipsisIcon,
-  InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 
 interface INavigation {
@@ -37,20 +35,5 @@ export const navigationLinks: INavigation[] = [
     name: "Pickers",
     path: "/picker",
     icon: BuildingStorefrontIcon,
-  },
-];
-
-export const customerCareLink: INavigation[] = [
-  {
-    id: "help-center",
-    name: "Help center",
-    path: "/help-center",
-    icon: InformationCircleIcon,
-  },
-  {
-    id: "contact-us",
-    name: "Contact us",
-    path: "/contact-us",
-    icon: ChatBubbleOvalLeftEllipsisIcon,
   },
 ];

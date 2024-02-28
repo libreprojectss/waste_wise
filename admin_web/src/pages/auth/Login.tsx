@@ -43,7 +43,7 @@ function Login() {
     <section className="min-h-screen flex justify-center items-center">
       <div className="min-w-[480px] p-12 rounded-[32px] shadow-2xl bg-white">
         <div className="text-center">
-          <h2 className="large-title text-core-indigo">IMS system</h2>
+          <h2 className="large-title text-core-indigo">Wastewise</h2>
         </div>
 
         <form className="mt-6" onSubmit={handleSubmit(handleLogin)}>

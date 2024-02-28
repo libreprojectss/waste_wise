@@ -7,6 +7,7 @@ import Login from "@/pages/auth/Login";
 import PageNotFound from "@/pages/404";
 import AppLayout from "@/layout/appLayout";
 import Home from "@/pages/home";
+import User from "@/pages/admin/user";
 const isLoggedin = true;
 export const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/user",
-        element: <Dashboard />,
+        element: <User />,
       },
       {
         path: "/picker",
