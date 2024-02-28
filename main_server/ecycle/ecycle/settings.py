@@ -100,9 +100,9 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "HOST": "127.0.0.1",
         "PORT": 5432,
-        "NAME": "cfc_db",
+        "NAME": "cfcdb",
         "USER": "postgres",
-        "PASSWORD": "12345",  # Add your actual password here if applicable
+        "PASSWORD": "",
     }
 }
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
