@@ -52,7 +52,7 @@ function AddUserForm({
     <form onSubmit={handleSubmit} className={cn(className)}>
       <fieldset>
         <label className="label" htmlFor="categoryName">
-          Full Name (required)
+          Location Name (required)
         </label>
         <input
           onChange={(e) => setLocationName(e.target.value)}
@@ -67,7 +67,7 @@ function AddUserForm({
         </MapLayout>
       </fieldset>
       <button disabled={isPending} className="mt-4 primary-btn title-body">
-        Add user {isPending && "..."}
+        Add Collection center {isPending && "..."}
       </button>
     </form>
   );
