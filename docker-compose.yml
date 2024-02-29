@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  server:
+    build: ./admin_server
+    container_name: admin_server
+    env_file: ./admin_server/.env
+    restart: always
+    ports:
+      - "3001:3001"
+    depends_on:
+      - grpc_server
+      - fastapi_server
+    networks:
+      - waste_wise_network
+
+  grpc_server:
+    build: ./admin_server
+    container_name: grpc_server
+    ports:
+      - "5001:5001"
+    command: ["node", "grpc_server.js"]
+    networks:
+      - waste_wise_network
+
+  fastapi_server:
+    build: ./main_server/services
+    container_name: fastapi_server
+    ports:
+      - "5002:8001"
+    networks:
+      - waste_wise_network
+
+networks:
+  waste_wise_network:
+    driver: bridge
