@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+service ClusterService {
+    rpc GeneratePriorityQueue(Coordinates) returns (ClusterList) {}
+}
+
+message Coordinates {
+    repeated Coordinate coordinate = 1;
+}
+
+message Coordinate {
+    float lat = 1;
+    float long = 2;
+}
+
+message Cluster {
+    Coordinate centroid = 1;
+    repeated string points = 2;
+    float max_radius = 3;
+    float density_ratio = 4;
+}
+
+message ClusterList {
+    repeated Cluster cluster = 1;
+}
