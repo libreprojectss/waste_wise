@@ -3,6 +3,7 @@ from rest_framework import serializers,status
 from django.core.files.base import ContentFile
 import base64,os
 from django.conf import settings
+
 class ProductSerializer(serializers.ModelSerializer):
     image=serializers.CharField()
     class Meta:
@@ -25,6 +26,7 @@ class ProductSerializer(serializers.ModelSerializer):
             validated_data["image"]=decoded_image
 
         return super().create(validated_data)
+    
 class PickupSerializer(serializers.ModelSerializer):
     products=ProductSerializer(many=True,read_only=True)
     class Meta:

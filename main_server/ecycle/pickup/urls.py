@@ -8,5 +8,6 @@ urlpatterns = [
     path('completed/',PickedViews.as_view()),
     path('pickup/<str:pickup_id>/', PickupView.as_view()),
     path('amenity/all/',GetAmenity.as_view()),
-    path('user/',UserPickups.as_view())
+    path('user/',UserPickups.as_view()),
+    path('cluster/',ClusterPickupView.as_view()),
 ]

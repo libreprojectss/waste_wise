@@ -1,5 +1,7 @@
+
 from pickup.models import *
 from pickup.serializers import ProductSerializer
+
 def get_arranged_pickups_by_location():
     location_dict=dict()
     all_pickups=pickups.objects.all()

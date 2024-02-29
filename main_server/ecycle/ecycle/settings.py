@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     ##defined apps
     'account',
     'pickup',
-    'images_processor'
+    'images_processor',
+    'grpc'
    
 ]
 
