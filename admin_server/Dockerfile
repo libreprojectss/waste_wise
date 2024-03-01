@@ -10,6 +10,6 @@ RUN yarn install
 COPY . .
 
 EXPOSE 3001
-EXPOSE 5001
+EXPOSE 50051
 
 CMD ["node", "index.js"]

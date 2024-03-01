@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon index.js",
-    "grpc":"node grpc_server.js",
-    "start":"node index.js"
+    "grpc": "node grpc_server.js",
+    "start": "concurrently \"npm run grpc\" \"node index.js\""
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "nodemon": "^3.0.3"
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "prisma": "^5.9.1"
   }
 }
