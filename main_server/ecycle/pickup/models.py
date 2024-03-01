@@ -15,12 +15,22 @@ class ProductImageFilename:
 product_image_upload_to = ProductImageFilename()
 
 
+
 class pickups(models.Model):
+    class ProductStatus(models.TextChoices):
+        PENDING = 'pending', 'Pending'
+        SCHEDULED = 'scheduled', 'Scheduled'
+        COMPLETED = 'completed', 'Completed'
     lat=models.FloatField() 
     lng=models.FloatField() 
     picked_on=models.DateTimeField(default=None,blank=True,null=True)
     picked_by=models.ForeignKey(Picker,on_delete=models.CASCADE,null=True,default=None)
-
+    status = models.CharField(
+        max_length=20,
+        choices=ProductStatus.choices,
+        default=ProductStatus.PENDING,
+    )
+    
     @property
     def is_picked(self):
         if self.picked_on:

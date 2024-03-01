@@ -30,9 +30,11 @@ class ProductSerializer(serializers.ModelSerializer):
     
 class PickupSerializer(serializers.ModelSerializer):
     product=ProductSerializer(many=True,read_only=True)
+    product_details=serializers.SerializerMethodField(read_only=True)
     class Meta:
         model=pickups
-        fields=['product','lat','lng','picked_on','is_picked']
-
+        fields=['product','lat','lng','picked_on','is_picked',"status","product_details"]
+    def get_product_details(self,instance):
+        return ProductSerializer(instance.get_products(),many=True).data[0]
     
     

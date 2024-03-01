@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from pickup.serializers import *
+from pickup.models import *
 from rest_framework.response import Response
 from django.core.files.base import ContentFile
 import base64
@@ -29,7 +30,7 @@ class CreatePickupView(APIView):
 
 class PickedViews(APIView):
     def get(self,request):
-        objects=pickups.objects.exclude(picked_on=None)
+        objects=pickups.objects.filter(status="completed").exclude(picked_on=None)
         data=PickupSerializer(objects,many=True).data
         return Response({"message":"Data fetched sucessfully","type":"success","data":data})
     
@@ -37,7 +38,7 @@ class UserPickups(APIView):
     permission_classes=[IsAuthenticated,IsCustomer]
     
     def get(self,request):
-        product_list=products.objects.filter(user=request.user)
+        product_list=product.objects.filter(user=request.user)
         pickups_obj_list=list()
         for i in product_list:
             if i.pickup not in pickups_obj_list:
