@@ -1,0 +1,2 @@
+python grpc build command using grpc_tools
+python -m grpc_tools.protoc -I../../admin_server/grpc/protos --python_out=. --pyi_out=. --grpc_python_out=. ../../admin_server/grpc/protos/cluster.proto

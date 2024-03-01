@@ -9,7 +9,7 @@ const LocationSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  lng: {
+  long: {
     type: Number,
     required: true,
   },

@@ -51,11 +51,12 @@ def get_priority_queue():
 class ClusterPickupView(APIView):
     def get(self,request):
         data=get_priority_queue()
-        print(type(data))
+        print(data)
         response_dict = {
         'clusters': [
             {
                 'centroid': {
+                    'location_name':cluster.centroid.location_name,
                     'lat': cluster.centroid.lat,
                     'long': cluster.centroid.long
                 },

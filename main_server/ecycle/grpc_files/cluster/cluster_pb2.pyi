@@ -19,17 +19,27 @@ class Coordinate(_message.Message):
     long: float
     def __init__(self, lat: _Optional[float] = ..., long: _Optional[float] = ...) -> None: ...
 
+class Centroid(_message.Message):
+    __slots__ = ("location_name", "lat", "long")
+    LOCATION_NAME_FIELD_NUMBER: _ClassVar[int]
+    LAT_FIELD_NUMBER: _ClassVar[int]
+    LONG_FIELD_NUMBER: _ClassVar[int]
+    location_name: str
+    lat: float
+    long: float
+    def __init__(self, location_name: _Optional[str] = ..., lat: _Optional[float] = ..., long: _Optional[float] = ...) -> None: ...
+
 class Cluster(_message.Message):
     __slots__ = ("centroid", "points", "max_radius", "density_ratio")
     CENTROID_FIELD_NUMBER: _ClassVar[int]
     POINTS_FIELD_NUMBER: _ClassVar[int]
     MAX_RADIUS_FIELD_NUMBER: _ClassVar[int]
     DENSITY_RATIO_FIELD_NUMBER: _ClassVar[int]
-    centroid: Coordinate
+    centroid: Centroid
     points: _containers.RepeatedScalarFieldContainer[str]
     max_radius: float
     density_ratio: float
-    def __init__(self, centroid: _Optional[_Union[Coordinate, _Mapping]] = ..., points: _Optional[_Iterable[str]] = ..., max_radius: _Optional[float] = ..., density_ratio: _Optional[float] = ...) -> None: ...
+    def __init__(self, centroid: _Optional[_Union[Centroid, _Mapping]] = ..., points: _Optional[_Iterable[str]] = ..., max_radius: _Optional[float] = ..., density_ratio: _Optional[float] = ...) -> None: ...
 
 class ClusterList(_message.Message):
     __slots__ = ("cluster",)

@@ -2,15 +2,14 @@ import grpc from "@grpc/grpc-js";
 import protoLoader from "@grpc/proto-loader";
 import path from "path";
 import { generate_priority_queue } from "./grpc/services/getClusterPriorityQueue.js";
-
+import connectDB from "./config/mongo.js";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-
+import dotenv from "dotenv";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const CLUSTER_PROTO_PATH = path.resolve(__dirname, 'grpc/protos/cluster.proto');
-console.log(CLUSTER_PROTO_PATH);
 
 const packageDefinition = protoLoader.loadSync(CLUSTER_PROTO_PATH, {
     keepCase: true,
@@ -34,4 +33,6 @@ function main() {
     console.log('Server running at http://127.0.0.1:50051');
 }
 
+dotenv.config()
+connectDB()
 main();

@@ -13,8 +13,14 @@ message Coordinate {
     float long = 2;
 }
 
+message Centroid{
+    string location_name = 1;
+    float lat = 2;
+    float long = 3;
+}
+
 message Cluster {
-    Coordinate centroid = 1;
+    Centroid centroid = 1;
     repeated string points = 2;
     float max_radius = 3;
     float density_ratio = 4;
