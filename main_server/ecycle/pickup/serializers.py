@@ -7,7 +7,7 @@ from django.conf import settings
 class ProductSerializer(serializers.ModelSerializer):
     image=serializers.CharField()
     class Meta:
-        model=products
+        model=product
         fields="__all__"
         read_only_fields=["user"]
     
@@ -28,10 +28,10 @@ class ProductSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
     
 class PickupSerializer(serializers.ModelSerializer):
-    products=ProductSerializer(many=True,read_only=True)
+    product=ProductSerializer(many=True,read_only=True)
     class Meta:
         model=pickups
-        fields=['products','lat','lng','picked_on','is_picked']
+        fields=['product','lat','lng','picked_on','is_picked']
 
     
     

@@ -9,7 +9,7 @@ class pickups(models.Model):
     lat=models.FloatField() 
     lng=models.FloatField() 
     picked_on=models.DateTimeField(default=None,blank=True,null=True)
-    picked_by=models.ForeignKey(Picker,on_delete=models.CASCADE)
+    picked_by=models.ForeignKey(Picker,on_delete=models.CASCADE,null=True,default=None)
 
     @property
     def is_picked(self):
@@ -25,7 +25,7 @@ class pickups(models.Model):
     class Meta:
         ordering=["-picked_on"]
 
-class products(models.Model):
+class product(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     pickup=models.ForeignKey(pickups,on_delete=models.CASCADE, related_name="products",default=None,null=True)
     title=models.CharField(max_length=255)
@@ -46,7 +46,7 @@ class products(models.Model):
 
 
 class donate(models.Model):
-    product=models.ForeignKey(products,on_delete=models.CASCADE)
+    product=models.ForeignKey(product,on_delete=models.CASCADE)
     donated_on=models.DateTimeField()
     verified_status=models.BooleanField()
     
