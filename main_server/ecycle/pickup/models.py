@@ -1,9 +1,19 @@
 from django.db import models
 from account.models import User,Picker
+from django.utils.deconstruct import deconstructible
 
-def product_image_upload_to(instance, filename):
-    id_var= instance.id
-    return f"/media/{id_var}/product_image/{filename}"
+@deconstructible
+class ProductImageFilename:
+    def __init__(self, subfolder="product_image"):
+        self.subfolder = subfolder
+
+    def __call__(self, instance, filename):
+        # Generate a unique filename based on the instance's pickup ID
+        pickup_id = instance.pickup_id if instance.pickup_id else "no_pickup"
+        return f"{self.subfolder}/{pickup_id}/{filename}"
+
+product_image_upload_to = ProductImageFilename()
+
 
 class pickups(models.Model):
     lat=models.FloatField() 

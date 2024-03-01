@@ -4,26 +4,26 @@ from pickup.serializers import *
 from rest_framework.response import Response
 from django.core.files.base import ContentFile
 import base64
+from account.permissions import IsPicker,IsCustomer
 from pickup.helpers.pickups_by_location import get_arranged_pickups_by_location
 from rest_framework.permissions import IsAuthenticated
 
 class PickupView(APIView):
     def get(self,request,pickup_id=None):
         data=get_arranged_pickups_by_location()
-        print(data)
         return Response({"message":"Data fetched sucessfully","type":"success","data":data})
     
 class CreatePickupView(APIView):
-        permission_classes=[IsAuthenticated]
+        permission_classes=[IsAuthenticated,IsCustomer]
         def post(self,request):
             if not request.data.get("product",""):
                 return Response({"message":"Product field is required","type":"error"},400)
             serialized_data=PickupSerializer(data=request.data)
             if serialized_data.is_valid(raise_exception=True):
                 pickup=serialized_data.save()
-            serialized_data=ProductSerializer(data=request.data["product"])
-            if serialized_data.is_valid(raise_exception=True):
-                serialized_data.save(user=request.user,pickup=pickup)
+            product_serialize=ProductSerializer(data=request.data["product"])
+            if product_serialize.is_valid(raise_exception=True):
+                product_serialize.save(user=request.user,pickup=pickup)
             
                 return Response({"message":"Pickup request recorded sucessfully","type":"success"},status=status.HTTP_201_CREATED)
 
@@ -34,7 +34,7 @@ class PickedViews(APIView):
         return Response({"message":"Data fetched sucessfully","type":"success","data":data})
     
 class UserPickups(APIView):
-    permission_classes=[IsAuthenticated]
+    permission_classes=[IsAuthenticated,IsCustomer]
     
     def get(self,request):
         product_list=products.objects.filter(user=request.user)

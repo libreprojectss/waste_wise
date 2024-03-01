@@ -18,12 +18,13 @@ class ProductSerializer(serializers.ModelSerializer):
         if image_data:
             padding = '=' * (4 - (len(image_data) % 4))
             image_data += padding
-            # Decode the base64 string and create a ContentFile
-            print(validated_data)
-            decoded_image = ContentFile(base64.b64decode(image_data.encode()), name=f'${validated_data["pickup"].id}.png')
 
-           
-            validated_data["image"]=decoded_image
+            # Check if "pickup" is not None
+            pickup_instance = validated_data.get("pickup")
+            if pickup_instance:
+                # Decode the base64 string and create a ContentFile
+                decoded_image = ContentFile(base64.b64decode(image_data.encode()), name=f'{pickup_instance.id}.png')
+                validated_data["image"] = decoded_image
 
         return super().create(validated_data)
     

@@ -13,24 +13,39 @@ class UserCreateView(APIView):
         serializeddata=SignupSerializer(data=request.data)
         if serializeddata.is_valid(raise_exception=True):
             data=serializeddata.save()
-            token=get_tokens_for_user(User.objects.get(email=data.email))
-            return Response({"success":"Account created sucessfully.","token":token},status=status.HTTP_200_OK)
+            user=User.objects.get(email=data.email)
+            serialized_user=AccountSerializer(user)
+            token=get_tokens_for_user(user)
+            return Response({"success":"Account created sucessfully.","token":token,"user":serialized_user.data},status=status.HTTP_200_OK)
+
+class PickerCreateView(APIView):
+    def post(self, request):
+        print("Request Data:", request.data)
+        serializeddata = SignupSerializer(data=request.data)
+
+        if serializeddata.is_valid(raise_exception=True):
+            picker = serializeddata.save()
+
+            serialized_user = AccountSerializer(picker)
+            token = get_tokens_for_user(picker)
+
+            return Response({"success": "Picker account created successfully.", "token": token, "user": serialized_user.data}, status=status.HTTP_200_OK)
 
 
 #View for login
 class LoginView(APIView):
-    renderer_classes=[UserRenderer]
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             token = serializer.validated_data['token']
             if serializer.validated_data["is_verified"]:
-                user=AccountSerializer(serializer.validated_data["user"]).data
+                user=User.objects.get(email=request.data["email"])
+                serialized_data=AccountSerializer(user).data
                 
 
                 return Response({'token': token,
                                  'success': "Login successful",
-                                  'user':user},
+                                  'user':serialized_data},
                                   status=status.HTTP_200_OK)
             else:
                 

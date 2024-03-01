@@ -13,7 +13,7 @@ class SignupSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('password', 'email', 'phone_number', 'name', 'confirm_password')
+        fields = ('password', 'email', 'phone_number', 'name', 'confirm_password','is_picker')
         extra_kwargs = {
             'password': {'write_only': True},
         }
@@ -64,12 +64,12 @@ class LoginSerializer(serializers.Serializer):
             raise serializers.ValidationError('Invalid credentials')
         return data
     
-class AccountSerializer(serializers.Serializer):
+class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
-        fields="__all__"
+        exclude=["password","groups","user_permissions"]
 
-class NotificationSerializer(serializers.Serializer):
+class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model=Notifications
         fields="__all__"
