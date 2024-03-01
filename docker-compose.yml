@@ -31,6 +31,16 @@ services:
     networks:
       - waste_wise_network
 
+  postgresql:
+    image: postgres:latest
+    container_name: postgresql
+    environment:
+      POSTGRES_DB: cfcdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ""
+    networks:
+      - waste_wise_network
+
 networks:
   waste_wise_network:
     driver: bridge

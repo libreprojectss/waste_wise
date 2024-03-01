@@ -13,7 +13,8 @@ const calculate_density_ratio=(cluster_object)=>{
 }
 async function group_coordinates(coordinates){
     const dbLocations=await centroid_locations.find().select(["-__v","-_id"])
-    const clusters=[]
+    const clusters=[
+    ]
     for (let i=0; i<dbLocations.length; i++){
         clusters.push({
             centroid: dbLocations[i],
@@ -27,7 +28,7 @@ async function group_coordinates(coordinates){
         let min_length=Infinity
         let max_radius=0
         for (let j=0; j<clusters.length; j++){
-            const distance=calculate_distance(coordinates[i].lat, coordinates[i].long, clusters[j].centroid.lat, clusters[j].centroid.long)
+            const distance=calculate_distance(coordinates[i].lat, coordinates[i].lng, clusters[j].centroid.lat, clusters[j].centroid.lng)
             if(distance<min_length){
                 selected_location=clusters[j]
                 min_length=distance
@@ -42,9 +43,9 @@ async function group_coordinates(coordinates){
         }
         const formattedCoordinate = {
             "lat": coordinates[i].lat,
-            "long": coordinates[i].long
+            "lng": coordinates[i].lng
         };
-        selected_location.points.push(JSON.stringify(formattedCoordinate))
+        selected_location?.points?.push(JSON.stringify(formattedCoordinate))
         selected_location.max_radius=max_radius
     }
 

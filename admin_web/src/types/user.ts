@@ -16,5 +16,5 @@ export interface IUserState {
 
 export interface Ilocation {
   lat: number;
-  long: number;
+  lng: number;
 }

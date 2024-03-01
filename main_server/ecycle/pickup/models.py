@@ -7,7 +7,7 @@ def product_image_upload_to(instance, filename):
 
 class pickups(models.Model):
     lat=models.FloatField() 
-    long=models.FloatField() 
+    lng=models.FloatField() 
     picked_on=models.DateTimeField(default=None,blank=True,null=True)
     picked_by=models.ForeignKey(Picker,on_delete=models.CASCADE)
 
@@ -17,7 +17,7 @@ class pickups(models.Model):
             return True
         return False
     def __str__(self):
-        return f"{self.lat},{self.long}"
+        return f"{self.lat},{self.lng}"
     
     def get_products(self):
         return self.products.all()

@@ -2,7 +2,7 @@ export interface Location {
   _id: string;
   location_name: string;
   lat: number;
-  long: number;
+  lng: number;
 }
 
 export default interface ILocationResponse {

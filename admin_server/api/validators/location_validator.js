@@ -8,7 +8,7 @@ class LocationValidator extends Base_Validator {
     this.schema = vine.object({
       location_name: vine.string(),
       lat: vine.number(),
-      long: vine.number(),
+      lng: vine.number(),
     });
   }
 }

@@ -99,13 +99,14 @@ REST_FRAMEWORK = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": "127.0.0.1",
+        "HOST": "localhost", 
         "PORT": 5432,
         "NAME": "cfcdb",
         "USER": "postgres",
         "PASSWORD": "",
     }
 }
+
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 

@@ -31,7 +31,7 @@ class PickupSerializer(serializers.ModelSerializer):
     products=ProductSerializer(many=True,read_only=True)
     class Meta:
         model=pickups
-        fields=['products','lat','long','picked_on','is_picked']
+        fields=['products','lat','lng','picked_on','is_picked']
 
     
     

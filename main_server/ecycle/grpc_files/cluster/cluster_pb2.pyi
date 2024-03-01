@@ -12,22 +12,22 @@ class Coordinates(_message.Message):
     def __init__(self, coordinate: _Optional[_Iterable[_Union[Coordinate, _Mapping]]] = ...) -> None: ...
 
 class Coordinate(_message.Message):
-    __slots__ = ("lat", "long")
+    __slots__ = ("lat", "lng")
     LAT_FIELD_NUMBER: _ClassVar[int]
-    LONG_FIELD_NUMBER: _ClassVar[int]
+    LNG_FIELD_NUMBER: _ClassVar[int]
     lat: float
-    long: float
-    def __init__(self, lat: _Optional[float] = ..., long: _Optional[float] = ...) -> None: ...
+    lng: float
+    def __init__(self, lat: _Optional[float] = ..., lng: _Optional[float] = ...) -> None: ...
 
 class Centroid(_message.Message):
-    __slots__ = ("location_name", "lat", "long")
+    __slots__ = ("location_name", "lat", "lng")
     LOCATION_NAME_FIELD_NUMBER: _ClassVar[int]
     LAT_FIELD_NUMBER: _ClassVar[int]
-    LONG_FIELD_NUMBER: _ClassVar[int]
+    LNG_FIELD_NUMBER: _ClassVar[int]
     location_name: str
     lat: float
-    long: float
-    def __init__(self, location_name: _Optional[str] = ..., lat: _Optional[float] = ..., long: _Optional[float] = ...) -> None: ...
+    lng: float
+    def __init__(self, location_name: _Optional[str] = ..., lat: _Optional[float] = ..., lng: _Optional[float] = ...) -> None: ...
 
 class Cluster(_message.Message):
     __slots__ = ("centroid", "points", "max_radius", "density_ratio")

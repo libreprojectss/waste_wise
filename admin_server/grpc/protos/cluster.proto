@@ -10,13 +10,13 @@ message Coordinates {
 
 message Coordinate {
     float lat = 1;
-    float long = 2;
+    float lng = 2;
 }
 
 message Centroid{
     string location_name = 1;
     float lat = 2;
-    float long = 3;
+    float lng = 3;
 }
 
 message Cluster {

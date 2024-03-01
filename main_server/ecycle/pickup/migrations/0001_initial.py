@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('lat', models.FloatField()),
-                ('long', models.FloatField()),
+                ('lng', models.FloatField()),
                 ('picked_on', models.DateTimeField(blank=True, default=None, null=True)),
             ],
         ),
