@@ -40,7 +40,6 @@ def get_priority_queue():
     channel = grpc.insecure_channel('localhost:50051')  
     stub = cluster__pb2_grpc.ClusterServiceStub(channel)
     request = cluster__pb2.Coordinates()
-    print("request",request)
     for coord in coordinates:
         coordinate = request.coordinate.add()
         coordinate.lat = coord['lat']

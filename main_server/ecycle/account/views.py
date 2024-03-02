@@ -1,8 +1,9 @@
-from .serializers import SignupSerializer,LoginSerializer,AccountSerializer
+from .serializers import SignupSerializer,LoginSerializer,AccountSerializer,PickerLocationsSerializer
 from rest_framework.views import APIView
 from account.renderers import UserRenderer
 from rest_framework.response import Response
-from account.models import User
+from account.models import User,Picker_Locations
+from account.permissions import IsPicker
 from .helpers import get_tokens_for_user
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
@@ -91,3 +92,18 @@ class NotificationViews(APIView):
     def get(self,request):
         notifications=Notifications.objects.filter(user=request.user)
         serialized_data=NotificationSerializer()
+
+class PickerLocationsViews(APIView):
+        permission_classes=[IsAuthenticated,IsPicker]
+        def post(self,request):
+            picker_locations=PickerLocationsSerializer(data=request.data)
+            picker_locations.is_valid(raise_exception=True)
+            location_objs=Picker_Locations.objects.filter(user=request.user)
+            if(len(location_objs)>0):
+                location_obj=location_objs[0]
+                location_obj.lat=request.data["lat"]
+                location_obj.lng=request.data["lng"]
+                location_obj.save()
+            else:
+                picker_locations.save()
+            return Response({"message":"Picker locations recorded sucessfully","type":"success","data":None},200)

@@ -1,4 +1,4 @@
-from .models import User,Notifications
+from .models import User,Notifications,Picker_Locations
 from django.contrib.auth import authenticate
 from rest_framework import serializers,status
 from phonenumber_field.phonenumber import to_python
@@ -71,5 +71,11 @@ class AccountSerializer(serializers.ModelSerializer):
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model=Notifications
+        fields="__all__"
+        read_only_fields=["user"]
+
+class PickerLocationsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Picker_Locations
         fields="__all__"
         read_only_fields=["user"]
