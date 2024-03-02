@@ -1,5 +1,5 @@
 from pickup.models import picker_pickups,pickups
-from account.models import Picker_Locations,User
+from account.models import Picker_Locations,User,Notifications
 from geopy.distance import geodesic
 
 picker_locations=[{
@@ -143,6 +143,7 @@ def assign_picker(pickup_points_list):
             for picker in pickers_availability:
                 if picker["picker"]==nearest_picker_info:
                     picker["available"]=False
+            Notifications.objects.create(user=nearest_picker_info,message="Some pickups have been assigned to you. Please visit the map to find them and do complete them in time")
             picker=picker_pickups.objects.get(picker=nearest_picker_info)
             if len(picker.pickups.all())!=0:
                 picker.is_free=False

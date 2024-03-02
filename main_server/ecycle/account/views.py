@@ -1,8 +1,8 @@
-from .serializers import SignupSerializer,LoginSerializer,AccountSerializer,PickerLocationsSerializer
+from .serializers import SignupSerializer,LoginSerializer,AccountSerializer,PickerLocationsSerializer,NotificationSerializer
 from rest_framework.views import APIView
 from account.renderers import UserRenderer
 from rest_framework.response import Response
-from account.models import User,Picker_Locations
+from account.models import User,Picker_Locations,Notifications
 from account.permissions import IsPicker
 from .helpers import get_tokens_for_user
 from rest_framework import status
@@ -16,6 +16,7 @@ class UserCreateView(APIView):
             data=serializeddata.save()
             user=User.objects.get(email=data.email)
             serialized_user=AccountSerializer(user)
+            Notifications.objects.create(user=request.user,message="Hello user. Welcome to wastewise.Lets schedule a pickup now and show your contribution to the environment")
             token=get_tokens_for_user(user)
             return Response({"success":"Account created sucessfully.","token":token,"user":serialized_user.data},status=status.HTTP_200_OK)
 
@@ -91,7 +92,8 @@ class NotificationViews(APIView):
     permission_classes=[IsAuthenticated]
     def get(self,request):
         notifications=Notifications.objects.filter(user=request.user)
-        serialized_data=NotificationSerializer()
+        serialized_data=NotificationSerializer(notifications,many=True)
+        return Response({"message":"Notifications fetched sucessfully","data":serialized_data.data,"type":"success"})
 
 class PickerLocationsViews(APIView):
         permission_classes=[IsAuthenticated,IsPicker]

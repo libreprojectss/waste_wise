@@ -8,6 +8,7 @@ import base64
 from account.permissions import IsCustomer,IsPicker
 from pickup.helpers.pickups_by_location import get_arranged_pickups_by_location
 from rest_framework.permissions import IsAuthenticated
+from account.models import Notifications
 import datetime
 
 class PickupView(APIView):
@@ -26,7 +27,7 @@ class CreatePickupView(APIView):
             product_serialize=ProductSerializer(data=request.data["product"])
             if product_serialize.is_valid(raise_exception=True):
                 product_serialize.save(user=request.user,pickup=pickup)
-            
+                Notifications.objects.create(user=request.user,message="Your pickup has been recorded sucessfully. Please  keep track of the pickups from the pickups page")
                 return Response({"message":"Pickup request recorded sucessfully","type":"success"},status=status.HTTP_201_CREATED)
 
 
@@ -89,6 +90,7 @@ class SetPickupCompleted(APIView):
         pickup_requests.pickups.remove(pickup)
         if(len(pickup_requests.pickups.all())==0):
             pickup_requests.is_free=True
+        Notifications.objects.create(user=request.user,message="Hurray! Thank you for completing all the assigned pickups")
         pickup_requests.save()
         pickup.save()
         return Response({"message":"Pickup marked completed sucessfully","type":"success","data":None})

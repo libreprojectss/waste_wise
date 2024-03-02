@@ -67,7 +67,8 @@ class Picker(User):
 
 class Notifications(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
-    message=models.CharField( max_length=50)
+    message=models.TextField()
+    sent_on=models.DateTimeField(auto_now_add=True)
 
 class Picker_Locations(models.Model):
         user=models.ForeignKey(User, on_delete=models.CASCADE)
