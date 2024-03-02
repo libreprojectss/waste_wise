@@ -105,5 +105,5 @@ class PickerLocationsViews(APIView):
                 location_obj.lng=request.data["lng"]
                 location_obj.save()
             else:
-                picker_locations.save()
+                picker_locations.save(user=request.user)
             return Response({"message":"Picker locations recorded sucessfully","type":"success","data":None},200)
