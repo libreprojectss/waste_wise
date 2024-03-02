@@ -16,5 +16,6 @@ SQLAlchemy==2.0.25
 ultralytics==8.0.226
 uvicorn==0.27.0.post1
 grpcio==1.62.0
+grpcio-tools
 geopy
 django_extensions

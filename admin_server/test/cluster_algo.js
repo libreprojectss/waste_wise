@@ -64,8 +64,23 @@ const Locations = [
     }
 ]
 
+// function calculate_distance(lat1, lon1, lat2, lon2) {
+//     return Math.sqrt((lat1 - lat2) ** 2 + (lon1 - lon2) ** 2)
+// }
 function calculate_distance(lat1, lon1, lat2, lon2) {
-    return Math.sqrt((lat1 - lat2) ** 2 + (lon1 - lon2) ** 2)
+
+    const R = 6371; // Radius of the Earth in kilometers
+
+    const dLat = (lat2 - lat1) * Math.PI / 180;  // Convert degrees to radians
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c; // Distance in kilometers
+
+    return distance;
 }
 const calculate_density_ratio = (cluster_object) => {
     const density_ratio = cluster_object.points.length / (Math.PI * (cluster_object.max_radius ** 2))
@@ -83,10 +98,12 @@ function group_coordinates() {
     }
     for (let i = 0; i < random_coordinates.length; i++) {
         let selected_location = 0
+        const distances=[]
         let min_length = Infinity
         let max_radius = 0
         for (let j = 0; j < clusters.length; j++) {
             const distance = calculate_distance(random_coordinates[i].lat, random_coordinates[i].lng, clusters[j].centroid.lat, clusters[j].centroid.lng)
+            distances.push(distance)
             if (distance < min_length) {
                 selected_location = clusters[j]
                 min_length = distance
@@ -101,6 +118,7 @@ function group_coordinates() {
         }
         selected_location.points.push(JSON.stringify(random_coordinates[i]))
         selected_location.max_radius = max_radius
+        console.log("distance",distances)
     }
 
     for (const j of clusters) {

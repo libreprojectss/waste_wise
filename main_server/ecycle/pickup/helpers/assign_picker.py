@@ -141,7 +141,10 @@ def assign_picker(pickup_points_list):
                 if picker["picker"]==nearest_picker_info:
                     picker["available"]=False
             picker=picker_pickups.objects.get(picker=nearest_picker_info)
-            picker.is_free=False
+            if len(picker.pickups.all())!=0:
+                picker.is_free=False
+            else:
+                picker.is_free=True
             picker.save()
         else:
             print("No available pickers for point", point["pickup_identifier"])

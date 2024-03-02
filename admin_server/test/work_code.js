@@ -1,6 +1,3 @@
-import centroid_locations from "../../models/centroid_locations.js"
-
-
 function calculateDistance(coord1, coord2) {
     const { lat: lat1, lng: lon1 } = coord1;
     const { lat: lat2, lng: lon2 } = coord2;
@@ -72,27 +69,22 @@ function clusterLocations(clientLocations, centerLocations) {
         const { centroid, points } = cluster;
         const { maxRadius, maxRadiusCoord } = findMaxRadius(points, { lat: centroid.lat, lng: centroid.lng });
         cluster.max_radius = maxRadius;
-        if(maxRadius==0)
-        cluster.density_ratio=0
-        else
         cluster.density_ratio = points.length / (Math.PI * maxRadius * maxRadius);
     }
 
     return clusters;
 }
 
-export  const generate_priority_queue=async(call,callback)=>{
-    const coordinates = call.request.coordinate;
-    const dbLocations=await centroid_locations.find().select(["-__v","-_id"])
-    const clusters = clusterLocations(coordinates,dbLocations)
+const generate_priority_queue = () => {
+    const clusters = clusterLocations(clientLocations,centerLocations)
     for (const cluster of clusters){
         for(let point=0;point<cluster.points.length;point++){
             cluster.points[point]=JSON.stringify(cluster.points[point])
         }
     }
     clusters.sort((a, b) => (b.density_ratio - a.density_ratio))
-    console.log(clusters)
-    const response = { cluster: clusters };
-    callback(null, response);
+    return clusters
 
 }
+
+console.log(generate_priority_queue())

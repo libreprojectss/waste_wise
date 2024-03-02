@@ -70,3 +70,23 @@ class PickerPickups(APIView):
         else:
             serialized_data=[]
         return Response({"message":"Data fetched sucessfully","type":"success","data":serialized_data})
+
+
+class SetPickupCompleted(APIView):
+    permission_classes=[IsAuthenticated,IsPicker]
+
+    def post(self,request):
+        pickup_id=request.data["pickup_id"]
+        try:
+            pickup=pickups.objects.get(id=pickup_id)
+        except:
+            return Response({"message":"Pickup id is invalid","type":"error"})
+        pickup.picked_by=request.user
+        pickup_requests=picker_pickups.objects.get(picker=request.user)
+        pickup_requests.pickups.remove(pickup)
+        if(len(pickup_requests.pickups)==0):
+            pickup_requests.is_free=True
+        pickup_requests.save()
+        pickup.save()
+        return Response({"message":"Pickup marked completed sucessfully","type":"success","data":None})
+        
