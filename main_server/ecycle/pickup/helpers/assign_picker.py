@@ -81,3 +81,4 @@ picker_locations=[{
             }
         ]
 # def assign_pickers(cluster_queue):
+

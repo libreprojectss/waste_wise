@@ -36,6 +36,7 @@ coordinates=[
  ]
 
 
+
 def get_priority_queue():
     channel = grpc.insecure_channel('localhost:50051')  
     stub = cluster__pb2_grpc.ClusterServiceStub(channel)
@@ -51,8 +52,9 @@ def get_priority_queue():
 class ClusterPickupView(APIView):
     def get(self,request):
         data=get_priority_queue()
-        print(data)
-
+        for cluster in data:
+            objects = [json.loads(item) for item in cluster.points]
+            print(objects)
         response_dict = {
         'clusters': [
             {
