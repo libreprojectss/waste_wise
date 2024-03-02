@@ -3,8 +3,6 @@ from rest_framework.views import APIView
 from pickup.serializers import *
 from pickup.models import *
 from rest_framework.response import Response
-from django.core.files.base import ContentFile
-import base64
 from account.permissions import IsCustomer,IsPicker
 from pickup.helpers.pickups_by_location import get_arranged_pickups_by_location
 from rest_framework.permissions import IsAuthenticated

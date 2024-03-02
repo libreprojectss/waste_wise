@@ -91,6 +91,8 @@ def assign_picker(pickup_points_list):
     for picker in pickers:
         if len(picker_pickups.objects.filter(picker=picker))==0:
             picker_pickups.objects.create(picker=picker)
+        if len(Picker_Locations.objects.filter(user=picker))==0:
+            Picker_Locations.objects.create(user=picker,lat=0,lng=0)
 
     load_pickers = picker_pickups.get_free_pickers()
     if(len(load_pickers)==0):
@@ -136,7 +138,7 @@ def assign_picker(pickup_points_list):
                 pickup = pickups.objects.get(id=point["pickup_identifier"])
                 assigned_picker = nearest_picker_info
                 picker_pickup_instance, created = picker_pickups.objects.get_or_create(picker=assigned_picker)
-                if not pickup.is_picked:
+                if not pickup.is_picked and not pickup.is_scheduled:
                     picker_pickup_instance.pickups.add(pickup)
                     pickup.status="scheduled"
                     pickup.save()

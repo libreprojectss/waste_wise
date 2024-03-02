@@ -38,6 +38,13 @@ class pickups(models.Model):
         if self.picked_on:
             return True
         return False
+
+    @property
+    def is_scheduled(self):
+        if self.status=="scheduled":
+            return True
+        return False
+    
     def __str__(self):
         return f"{self.lat},{self.lng}"
     
