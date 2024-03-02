@@ -63,6 +63,7 @@ class PickerPickups(APIView):
             return Response({"message":"No any pickups available for now","type":"success","data":[]})
 
         pickups_queryset = picker_pickups_instance.pickups.all()
+        print(pickups_queryset)
 
         if len(pickups_queryset)!=0:
             serialized_data=PickupSerializer(pickups_queryset,many=True).data
