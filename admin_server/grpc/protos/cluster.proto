@@ -11,6 +11,7 @@ message Coordinates {
 message Coordinate {
     float lat = 1;
     float lng = 2;
+    int32 pickup_identifier=3;
 }
 
 message Centroid{

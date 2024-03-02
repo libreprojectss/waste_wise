@@ -43,7 +43,8 @@ async function group_coordinates(coordinates){
         }
         const formattedCoordinate = {
             "lat": coordinates[i].lat,
-            "lng": coordinates[i].lng
+            "lng": coordinates[i].lng,
+            "pickup_identifier":coordinates[i].pickup_identifier
         };
         selected_location?.points?.push(JSON.stringify(formattedCoordinate))
         selected_location.max_radius=max_radius

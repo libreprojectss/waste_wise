@@ -73,9 +73,11 @@ class donate(models.Model):
     
 class picker_pickups(models.Model):
     picker = models.OneToOneField(User, on_delete=models.CASCADE)
-    pickups = models.ManyToManyField(pickups)  
+    pickups = models.ManyToManyField(pickups,blank=True)  
     is_free = models.BooleanField(default=True) 
     
-
+    @classmethod
+    def get_free_pickers(cls):
+        return cls.objects.filter(is_free=True)
 
 

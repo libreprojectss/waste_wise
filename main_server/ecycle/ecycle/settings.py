@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'pickup',
     'images_processor',
     'ecycle_admin',
-    'grpc'
+    'grpc',
+    'django_extensions'
    
 ]
 
