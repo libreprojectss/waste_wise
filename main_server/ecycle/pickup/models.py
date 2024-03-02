@@ -1,6 +1,7 @@
 from django.db import models
 from account.models import User,Picker
 from django.utils.deconstruct import deconstructible
+from datetime import datetime
 
 @deconstructible
 class ProductImageFilename:
@@ -25,7 +26,7 @@ class pickups(models.Model):
     lng=models.FloatField() 
     requested_on=models.DateTimeField(auto_now_add=True)
     picked_on=models.DateTimeField(default=None,blank=True,null=True)
-    picked_by=models.ForeignKey(Picker,on_delete=models.CASCADE,null=True,default=None)
+    picked_by=models.ForeignKey(Picker,on_delete=models.CASCADE,null=True,blank=True,default=None)
     status = models.CharField(
         max_length=20,
         choices=ProductStatus.choices,

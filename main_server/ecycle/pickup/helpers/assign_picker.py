@@ -136,7 +136,10 @@ def assign_picker(pickup_points_list):
                 pickup = pickups.objects.get(id=point["pickup_identifier"])
                 assigned_picker = nearest_picker_info
                 picker_pickup_instance, created = picker_pickups.objects.get_or_create(picker=assigned_picker)
-                picker_pickup_instance.pickups.add(pickup)
+                if not pickup.is_picked:
+                    picker_pickup_instance.pickups.add(pickup)
+                    pickup.status="scheduled"
+                    pickup.save()
             for picker in pickers_availability:
                 if picker["picker"]==nearest_picker_info:
                     picker["available"]=False
