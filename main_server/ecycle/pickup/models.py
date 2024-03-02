@@ -23,6 +23,7 @@ class pickups(models.Model):
         COMPLETED = 'completed', 'Completed'
     lat=models.FloatField() 
     lng=models.FloatField() 
+    requested_on=models.DateTimeField(auto_now_add=True)
     picked_on=models.DateTimeField(default=None,blank=True,null=True)
     picked_by=models.ForeignKey(Picker,on_delete=models.CASCADE,null=True,default=None)
     status = models.CharField(
