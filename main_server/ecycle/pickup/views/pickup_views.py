@@ -5,7 +5,7 @@ from pickup.models import *
 from rest_framework.response import Response
 from django.core.files.base import ContentFile
 import base64
-from account.permissions import IsPicker,IsCustomer
+from account.permissions import IsCustomer,IsPicker
 from pickup.helpers.pickups_by_location import get_arranged_pickups_by_location
 from rest_framework.permissions import IsAuthenticated
 
@@ -49,3 +49,13 @@ class UserPickups(APIView):
             serialized_data=[""]
         return Response({"message":"Data fetched sucessfully","type":"success","data":serialized_data})
 
+class PickerPickups(APIView):
+    permission_classes=[IsAuthenticated,IsPicker]
+    
+    def get(self,request):
+        pickups_obj_list=pickups.objects.filter(picked_by=request.user)
+        if len(pickups_obj_list)==0:
+            serialized_data=PickupSerializer(pickups_obj_list,many=True).data
+        else:
+            serialized_data=[]
+        return Response({"message":"Data fetched sucessfully","type":"success","data":serialized_data})

@@ -52,6 +52,29 @@ class LoginView(APIView):
                 return Response({'error':'User is not verified'},status=status.HTTP_403_FORBIDDEN)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+#View for login
+class PickerLoginView(APIView):
+    def post(self, request):
+       
+        serializer = LoginSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            picker=User.objects.filter(email=request.data["email"],is_picker=True)
+            if not picker:
+                return Response({'error':'No picker account registered with the provided credentials'},status=status.HTTP_404_NOT_FOUND)
+            token = serializer.validated_data['token']
+            if serializer.validated_data["is_verified"]:
+                user=User.objects.get(email=request.data["email"])
+                serialized_data=AccountSerializer(user).data
+                return Response({'token': token,
+                                 'success': "Login successful",
+                                  'user':serialized_data},
+                                  status=status.HTTP_200_OK)
+            else:
+                
+                return Response({'error':'User is not verified'},status=status.HTTP_403_FORBIDDEN)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class GetUserById(APIView):
     def get(self,request,id):

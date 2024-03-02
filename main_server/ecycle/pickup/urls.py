@@ -10,4 +10,5 @@ urlpatterns = [
     path('amenity/all/',GetAmenity.as_view()),
     path('user/',UserPickups.as_view()),
     path('cluster/',ClusterPickupView.as_view()),
+    path('picker/',PickerPickups.as_view()),
 ]

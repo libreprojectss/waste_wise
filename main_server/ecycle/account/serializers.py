@@ -57,7 +57,6 @@ class LoginSerializer(serializers.Serializer):
             raise serializers.ValidationError("No any user is registered with this email")
         user=User.objects.get(email=data["email"])
         if user.check_password(data["password"]):
-            #JWT token generation
             token=get_tokens_for_user(user)
             return {'token':token,'is_verified': True,"user":user}
         else:
