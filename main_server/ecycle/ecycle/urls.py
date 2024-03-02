@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/',include("account.urls")),
     path('pickups/',include("pickup.urls")),
+    path('sys/admin/',include("ecycle_admin.urls")),
     path('model/',include("images_processor.urls")),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

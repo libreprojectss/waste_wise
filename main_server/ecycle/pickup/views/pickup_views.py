@@ -28,6 +28,10 @@ class CreatePickupView(APIView):
             
                 return Response({"message":"Pickup request recorded sucessfully","type":"success"},status=status.HTTP_201_CREATED)
 
+
+
+
+
 class PickedViews(APIView):
     def get(self,request):
         objects=pickups.objects.filter(status="completed").exclude(picked_on=None)
@@ -53,9 +57,15 @@ class PickerPickups(APIView):
     permission_classes=[IsAuthenticated,IsPicker]
     
     def get(self,request):
-        pickups_obj_list=pickups.objects.filter(picked_by=request.user)
-        if len(pickups_obj_list)==0:
-            serialized_data=PickupSerializer(pickups_obj_list,many=True).data
+        try:
+            picker_pickups_instance = picker_pickups.objects.get(picker=request.user)
+        except:
+            return Response({"message":"No any pickups available for now","type":"success","data":[]})
+
+        pickups_queryset = picker_pickups_instance.pickups.all()
+
+        if len(pickups_queryset)!=0:
+            serialized_data=PickupSerializer(pickups_queryset,many=True).data
         else:
             serialized_data=[]
         return Response({"message":"Data fetched sucessfully","type":"success","data":serialized_data})

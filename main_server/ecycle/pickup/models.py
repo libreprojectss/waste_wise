@@ -71,7 +71,11 @@ class donate(models.Model):
     donated_on=models.DateTimeField()
     verified_status=models.BooleanField()
     
-
+class picker_pickups(models.Model):
+    picker = models.OneToOneField(User, on_delete=models.CASCADE)
+    pickups = models.ManyToManyField(pickups)  
+    is_free = models.BooleanField(default=True) 
+    
 
 
 

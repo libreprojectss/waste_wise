@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rcluster.proto\".\n\x0b\x43oordinates\x12\x1f\n\ncoordinate\x18\x01 \x03(\x0b\x32\x0b.Coordinate\"&\n\nCoordinate\x12\x0b\n\x03lat\x18\x01 \x01(\x02\x12\x0b\n\x03lng\x18\x02 \x01(\x02\";\n\x08\x43\x65ntroid\x12\x15\n\rlocation_name\x18\x01 \x01(\t\x12\x0b\n\x03lat\x18\x02 \x01(\x02\x12\x0b\n\x03lng\x18\x03 \x01(\x02\"a\n\x07\x43luster\x12\x1b\n\x08\x63\x65ntroid\x18\x01 \x01(\x0b\x32\t.Centroid\x12\x0e\n\x06points\x18\x02 \x03(\t\x12\x12\n\nmax_radius\x18\x03 \x01(\x02\x12\x15\n\rdensity_ratio\x18\x04 \x01(\x02\"(\n\x0b\x43lusterList\x12\x19\n\x07\x63luster\x18\x01 \x03(\x0b\x32\x08.Cluster2G\n\x0e\x43lusterService\x12\x35\n\x15GeneratePriorityQueue\x12\x0c.Coordinates\x1a\x0c.ClusterList\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rcluster.proto\".\n\x0b\x43oordinates\x12\x1f\n\ncoordinate\x18\x01 \x03(\x0b\x32\x0b.Coordinate\"A\n\nCoordinate\x12\x0b\n\x03lat\x18\x01 \x01(\x02\x12\x0b\n\x03lng\x18\x02 \x01(\x02\x12\x19\n\x11pickup_identifier\x18\x03 \x01(\x05\";\n\x08\x43\x65ntroid\x12\x15\n\rlocation_name\x18\x01 \x01(\t\x12\x0b\n\x03lat\x18\x02 \x01(\x02\x12\x0b\n\x03lng\x18\x03 \x01(\x02\"a\n\x07\x43luster\x12\x1b\n\x08\x63\x65ntroid\x18\x01 \x01(\x0b\x32\t.Centroid\x12\x0e\n\x06points\x18\x02 \x03(\t\x12\x12\n\nmax_radius\x18\x03 \x01(\x02\x12\x15\n\rdensity_ratio\x18\x04 \x01(\x02\"(\n\x0b\x43lusterList\x12\x19\n\x07\x63luster\x18\x01 \x03(\x0b\x32\x08.Cluster2G\n\x0e\x43lusterService\x12\x35\n\x15GeneratePriorityQueue\x12\x0c.Coordinates\x1a\x0c.ClusterList\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -24,13 +24,13 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_COORDINATES']._serialized_start=17
   _globals['_COORDINATES']._serialized_end=63
   _globals['_COORDINATE']._serialized_start=65
-  _globals['_COORDINATE']._serialized_end=103
-  _globals['_CENTROID']._serialized_start=105
-  _globals['_CENTROID']._serialized_end=164
-  _globals['_CLUSTER']._serialized_start=166
-  _globals['_CLUSTER']._serialized_end=263
-  _globals['_CLUSTERLIST']._serialized_start=265
-  _globals['_CLUSTERLIST']._serialized_end=305
-  _globals['_CLUSTERSERVICE']._serialized_start=307
-  _globals['_CLUSTERSERVICE']._serialized_end=378
+  _globals['_COORDINATE']._serialized_end=130
+  _globals['_CENTROID']._serialized_start=132
+  _globals['_CENTROID']._serialized_end=191
+  _globals['_CLUSTER']._serialized_start=193
+  _globals['_CLUSTER']._serialized_end=290
+  _globals['_CLUSTERLIST']._serialized_start=292
+  _globals['_CLUSTERLIST']._serialized_end=332
+  _globals['_CLUSTERSERVICE']._serialized_start=334
+  _globals['_CLUSTERSERVICE']._serialized_end=405
 # @@protoc_insertion_point(module_scope)

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'account',
     'pickup',
     'images_processor',
+    'ecycle_admin',
     'grpc'
    
 ]

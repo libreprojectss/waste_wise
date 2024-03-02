@@ -12,12 +12,14 @@ class Coordinates(_message.Message):
     def __init__(self, coordinate: _Optional[_Iterable[_Union[Coordinate, _Mapping]]] = ...) -> None: ...
 
 class Coordinate(_message.Message):
-    __slots__ = ("lat", "lng")
+    __slots__ = ("lat", "lng", "pickup_identifier")
     LAT_FIELD_NUMBER: _ClassVar[int]
     LNG_FIELD_NUMBER: _ClassVar[int]
+    PICKUP_IDENTIFIER_FIELD_NUMBER: _ClassVar[int]
     lat: float
     lng: float
-    def __init__(self, lat: _Optional[float] = ..., lng: _Optional[float] = ...) -> None: ...
+    pickup_identifier: int
+    def __init__(self, lat: _Optional[float] = ..., lng: _Optional[float] = ..., pickup_identifier: _Optional[int] = ...) -> None: ...
 
 class Centroid(_message.Message):
     __slots__ = ("location_name", "lat", "lng")
