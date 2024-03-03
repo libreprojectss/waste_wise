@@ -44,6 +44,7 @@ class PromptDataCreate(BaseModel):
     request_key: str
     request_type: str
     result:str=None
+
 @prompt_app.post("/prompt_data/")
 async def create_prompt_data(request: Request, db: Session = Depends(connect_db)):
     try:
@@ -57,7 +58,7 @@ async def create_prompt_data(request: Request, db: Session = Depends(connect_db)
     ).all() 
         if len(result)==0:
             response = await generate_prompt_response(prompt_data.request_key, prompt_data.request_type, db)
-            prompt_data.result = response["response"]
+            prompt_data.result = response
             db_prompt_data = PromptData(**prompt_data.dict())
             db.add(db_prompt_data)
             db.commit()
