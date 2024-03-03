@@ -109,6 +109,8 @@ DATABASES = {
     }
 }
 
+TIME_ZONE = 'Asia/Kathmandu'
+
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
