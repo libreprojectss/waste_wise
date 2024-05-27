@@ -4,7 +4,7 @@ Waste Wise is a smart waste management system designed to streamline and optimiz
 
 ## System Overview
 
-![System Diagram](./system_architecture.png)
+![System Diagram](https://github.com/libreprojectss/waste_wise/blob/main/Screenshot%202024-05-28%20002734.png)
 
 ### Key Components
 1. **Customer and Picker (Driver)**
