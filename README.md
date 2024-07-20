@@ -40,9 +40,9 @@ Waste Wise is a smart waste management system designed to streamline and optimiz
    - Ensures efficient retrieval and caching of frequently requested data.
 
 ### Technologies Used
-- **Mobile App:** Built with cross-platform frameworks (e.g., React Native, Flutter)
-- **Admin WebApp:** Developed using modern web technologies (e.g., React.js, Angular)
-- **Primary Server:** Backend services (e.g., Node.js, Python/Django, Java/Spring Boot)
+- **Mobile App:** Flutter
+- **Admin WebApp:** ReactJs
+- **Primary Server:** Django
 - **Clustering Microservice:** Node.js server with gRPC communication
 - **Primary Database:** PostgreSQL
 - **Cluster Database:** MongoDB
